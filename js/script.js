@@ -12,70 +12,49 @@ function eraseContainer() {
   pokemonsContainer.innerHTML = "";
 }
 
-function loadPokemons() {
-  return fetch('https://pokeapi.co/api/v2/pokemon').then((response) => 
+function loadPokemons(offset, limit) {
+  return fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`).then((response) => 
     response.json()
   );
 }
 
-function prevFunction() {
-  offset = offset - limit;
-  
-  if (offset === 0) {
-    prevBtn.disabled = true;
-  }
+function renderList (pokemons) {
+  const container = document.createElement('ul');
+  pokemons.forEach((pokemon) => {
+    const pokemonName = document.createElement('li');
+    pokemonName.innerText = pokemon.name;
+    container.appendChild(pokemonName);
+  });
 
-  fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`).then((response) => response.json())
+  pokemonsContainer.appendChild(container);
+}
+
+function setButtonsEnabled(hasNext, hasPrev) {
+  nextBtn.disabled = !hasNext
+  prevBtn.disabled = !hasPrev
+}
+
+function loadPokemonsAndRenderList(offset, limit) {
+  loadPokemons(offset, limit)
   .then((data) => {
     eraseContainer();
-    const pokemons = data.results;
-
-    pokemons.forEach((pokemon) => {
-      const container = document.createElement('div');
-      const pokemonName = document.createElement('li');
-      pokemonName.innerText = pokemon.name;
-      container.appendChild(pokemonName);
-      pokemonsContainer.appendChild(container);
-    });
+    setButtonsEnabled(data.next, data.previous)
+    renderList(data.results)
   })  
+}
+
+function prevFunction() {
+  offset -= limit;
+
+  loadPokemonsAndRenderList(offset, limit)
 }
 
 function nextPokemons() {
-  offset = offset + limit;
+  offset += limit;
 
-  if (offset!==0) {
-    prevBtn.disabled = false;
-  }
-
-  fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`).then((response) => response.json())
-  .then((data) => {
-    eraseContainer();
-    const pokemons = data.results;
-
-    pokemons.forEach((pokemon) => {
-      const container = document.createElement('div');
-      const pokemonName = document.createElement('li');
-      pokemonName.innerText = pokemon.name;
-      container.appendChild(pokemonName);
-      pokemonsContainer.appendChild(container);
-    });
-  })  
+  loadPokemonsAndRenderList(offset, limit)
 }
 
-
-loadPokemons().then(data => {
-  const pokemons = data.results;
-
-  pokemons.forEach(pokemon => {
-
-    const container = document.createElement('div');
-  
-    const pokemonName = document.createElement('li');
-    pokemonName.innerText = pokemon.name;
-
-    container.appendChild(pokemonName);
-    pokemonsContainer.appendChild(container);
-  })
-})
-
-
+window.onload = function () {
+  loadPokemonsAndRenderList(offset, limit)
+}

@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
-        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="static/css/style.css" />
     </head>
     <body>
         <header class="header">
@@ -26,6 +26,31 @@
         <button id="previousBtn" disabled="true" class="btn">Previous</button>
         <button id="nextBtn" class="btn">Next</button>
 
-        <script src="js/script.js"></script>
+        <hr />
+
+        <h2>Get pokemons from our DB</h2>
+
+        <button id="localPokemonsBtn">Get</button>
+
+        <form id="form">
+            <div>
+                <label>
+                    <p>Name</p>
+                    <input type="text" name="name" />
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <p>Age</p>
+                    <input type="text" name="age" />
+                </label>
+            </div>
+
+            <button>Create a Pokemon</button>
+        </form>
+
+        <script src="static/js/script.js"></script>
+        <script src="static/js/local.js"></script>
     </body>
 </html>

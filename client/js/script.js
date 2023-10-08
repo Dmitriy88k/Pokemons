@@ -20,12 +20,22 @@ function loadPokemons(offset, limit) {
 
 function renderList (pokemons) {
   const container = document.createElement('ul');
-  pokemons.forEach((pokemon) => {
-    const pokemonName = document.createElement('li');
-    pokemonName.innerText = pokemon.name;
-    container.appendChild(pokemonName);
-  });
+   
+    pokemons.forEach((pokemon) => {
+      const pokemonList = document.createElement("li")
+      const pokemonHero = document.createElement('a');
 
+      const pokemonDetailsUrl = `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`;
+      
+      fetch(pokemonDetailsUrl).then((response) => response.json())
+      .then((data) => {
+        pokemonHero.href = `https://pokeapi.co/api/v2/pokemon/${data.weight}`;
+        pokemonHero.textContent = `${pokemon.name}`;
+        pokemonList.appendChild(pokemonHero)
+        container.appendChild(pokemonList); 
+      });
+    
+    });
   pokemonsContainer.appendChild(container);
 }
 
@@ -58,3 +68,5 @@ function nextPokemons() {
 window.onload = function () {
   loadPokemonsAndRenderList(offset, limit)
 }
+
+

@@ -5,7 +5,7 @@ body {
 }
 
 .header {
-    padding: 16px 32px;
+    padding: 8px 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -32,11 +32,11 @@ body {
     padding: 4px 8px;
     display: inline-block;
     text-decoration: none;
-    color: #000;
+    color: #fff;
 }
 
 .header-link a:hover {
-    background-color: #00000020;
+    color: #feca1b;
 }
 
 #container {
@@ -45,10 +45,20 @@ body {
 
 li {
     margin-top: 5px;
-    list-style-type: square;
+    list-style-type: disc;
     font-weight: bold;
     text-transform: capitalize;
-    color: #3761a8;
+    color:#feca1b;
+    
+}
+
+li a {
+  color: #feca1b;
+  text-decoration: none;
+}
+
+li a:hover {
+  text-decoration: underline;
 }
 
 .btn {
@@ -71,3 +81,77 @@ li {
 #nextBtn {
     margin-left: 15px;
 }
+
+.logo {
+  width: 22%;
+  margin-left: 5%;
+}
+
+
+
+body {
+  margin: 0;
+  min-height: 100vh; /* Ensures the body takes at least the full height of the viewport */
+  background: linear-gradient(217deg, #25345E, #322D29 70.71%),
+              linear-gradient(127deg, #2C3848, #25345E 70.71%),
+              linear-gradient(336deg, #20222C, #1E2536 70.71%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.main_container {
+  display: flex;
+  margin-top: 2%;
+}
+
+
+
+.pikachu {
+  width: 75%;
+  margin-top: 10%;
+}
+
+.left-side {
+  display: flex;
+  justify-content: center;
+
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.nintendo {
+  width: 20%;
+}
+
+.ball {
+  width: 15%;
+}
+
+.right-side h1{
+  font-family: 'Racing Sans One', cursive;
+  font-size: 55px;
+  color: white;
+}
+
+
+.posts_section {
+  margin-left: 30px;
+}
+
+.posts_header {
+  color:white; 
+  margin: 30px 0;
+}
+
+#posts h3, #posts p {
+  color: #feca1b;
+
+}
+

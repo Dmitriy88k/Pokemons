@@ -66,6 +66,15 @@ Promise.all([
     const phoneNumber = document.createElement('p');
     phoneNumber.innerText = `Phone# ${userData.phone}`; 
 
+    const viewLink = document.createElement('a');
+    const linkName = document.createTextNode('View Post');
+    viewLink.appendChild(linkName);
+    viewLink.href = `/post-page/${post.id}`;
+
+    viewLink.style.color = 'white';
+    viewLink.style.textDecoration = 'underline';
+
+
     const line = document.createElement('p');
     line.innerText = "____________________________________";
 
@@ -75,6 +84,7 @@ Promise.all([
     postContainer.appendChild(title);
     postContainer.appendChild(body);
     postContainer.appendChild(emailAddress);
+    postContainer.appendChild(viewLink);
     postContainer.appendChild(phoneNumber);
     postContainer.appendChild(line);
     

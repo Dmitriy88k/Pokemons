@@ -4,19 +4,50 @@ const searchBtn = document.getElementById('searchBtn');
 const idInput = document.getElementById('idInput');
 
 
+
+  
+
 searchBtn.addEventListener('click', function() {
   let idInputNumber = Number(idInput.value);
   console.log(idInputNumber);
-})
 
-searchBtn.addEventListener('click', function() {
-  fetch('https://jsonplaceholder.typicode.com/posts?userId=1')
-  .then(response => response.json())
+  fetch(`https://jsonplaceholder.typicode.com/posts?userId=${idInputNumber}`)
+    .then(response => response.json())
+    .then(newPosts => {
+      // Clear existing posts
+      postsContainer.innerHTML = "";
 
-  setTimeout(() => {
-    postsContainer.innerHTML = "";
-  }, 1000)
-})
+      // Render new posts
+      for (let post of newPosts) {
+        const postContainer = document.createElement('div');
+
+        const title = document.createElement('h3');
+        title.innerText = "Title: " + post.title;
+
+        const postId = document.createElement('p');
+        postId.innerText = `Post# ${post.id}`;
+        
+
+        const userId = document.createElement('p');
+        userId.innerText = `Author: ${post.userId}`;
+        userId.style.color = "white";
+
+        const body = document.createElement('p');
+        body.innerText = post.body;
+
+        const line = document.createElement('p');
+        line.innerText = "____________________________________";
+
+        postContainer.appendChild(postId);
+        postContainer.appendChild(userId);
+        postContainer.appendChild(title);
+        postContainer.appendChild(body);
+        postContainer.appendChild(line);
+
+        postsContainer.appendChild(postContainer);
+      }
+    })
+});
 
 
 
